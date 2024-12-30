@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Views\Images\coronavirus.png" />
+    <None Remove="Views\Images\cow.png" />
+    <None Remove="Views\Images\Drawing1.png" />
+    <None Remove="Views\Images\extreme-weather.png" />
+    <None Remove="Views\Images\global.png" />
+    <None Remove="Views\Images\house.png" />
+    <None Remove="Views\Images\log-out.png" />
+    <None Remove="Views\Images\question-mark.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.36" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.36">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.36" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.36">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\Images\coronavirus.png" />
+    <Resource Include="Views\Images\cow.png" />
+    <Resource Include="Views\Images\Drawing1.png" />
+    <Resource Include="Views\Images\extreme-weather.png" />
+    <Resource Include="Views\Images\global.png" />
+    <Resource Include="Views\Images\house.png" />
+    <Resource Include="Views\Images\log-out.png" />
+    <Resource Include="Views\Images\question-mark.png" />
+  </ItemGroup>
+
+</Project>

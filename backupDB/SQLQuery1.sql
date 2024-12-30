@@ -1,0 +1,582 @@
+USE [master]
+GO
+/****** Object:  Database [DaDManagement]    Script Date: 12/30/2024 8:14:41 PM ******/
+CREATE DATABASE [DaDManagement]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'DaDManagement', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\DATA\DaDManagement.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'DaDManagement_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\DATA\DaDManagement_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF
+GO
+ALTER DATABASE [DaDManagement] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [DaDManagement].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [DaDManagement] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [DaDManagement] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [DaDManagement] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [DaDManagement] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [DaDManagement] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [DaDManagement] SET AUTO_CLOSE ON 
+GO
+ALTER DATABASE [DaDManagement] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [DaDManagement] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [DaDManagement] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [DaDManagement] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [DaDManagement] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [DaDManagement] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [DaDManagement] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [DaDManagement] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [DaDManagement] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [DaDManagement] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [DaDManagement] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [DaDManagement] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [DaDManagement] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [DaDManagement] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [DaDManagement] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [DaDManagement] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [DaDManagement] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [DaDManagement] SET  MULTI_USER 
+GO
+ALTER DATABASE [DaDManagement] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [DaDManagement] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [DaDManagement] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [DaDManagement] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [DaDManagement] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [DaDManagement] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+ALTER DATABASE [DaDManagement] SET QUERY_STORE = OFF
+GO
+USE [DaDManagement]
+GO
+/****** Object:  Table [dbo].[Certificate]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Certificate](
+	[CertificateID] [int] IDENTITY(1,1) NOT NULL,
+	[FarmID] [int] NULL,
+	[IssueDate] [datetime] NULL,
+	[ExpiryDate] [datetime] NULL,
+	[CertificateName] [nvarchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[CertificateID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[DisasterPoint]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[DisasterPoint](
+	[DisasterID] [int] IDENTITY(1,1) NOT NULL,
+	[DisasterType] [nvarchar](50) NOT NULL,
+	[LocationName] [nvarchar](100) NOT NULL,
+	[Latitude] [float] NOT NULL,
+	[Longitude] [float] NOT NULL,
+	[Description] [nvarchar](500) NULL,
+	[OccurredTime] [datetime] NOT NULL,
+	[Severity] [nvarchar](50) NULL,
+	[ReportID] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[DisasterID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[DiseaseType]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[DiseaseType](
+	[DiseaseID] [int] IDENTITY(1,1) NOT NULL,
+	[DiseaseName] [nvarchar](100) NOT NULL,
+	[Description] [nvarchar](500) NULL,
+	[Severity] [nvarchar](50) NULL,
+	[DiseaseGroup] [nvarchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[DiseaseID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Districts]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Districts](
+	[DistrictID] [int] IDENTITY(1,1) NOT NULL,
+	[DistrictName] [nvarchar](100) NOT NULL,
+	[ProvinceID] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[DistrictID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[FileAttachment]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[FileAttachment](
+	[FileID] [int] IDENTITY(1,1) NOT NULL,
+	[FileName] [nvarchar](100) NOT NULL,
+	[FilePath] [nvarchar](200) NOT NULL,
+	[FileType] [nvarchar](50) NULL,
+	[ReportID] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[FileID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LivestockFarm]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LivestockFarm](
+	[FarmID] [int] IDENTITY(1,1) NOT NULL,
+	[FarmName] [nvarchar](100) NOT NULL,
+	[Address] [nvarchar](200) NULL,
+	[OwnerName] [nvarchar](100) NULL,
+	[Phone] [nvarchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[FarmID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LivestockFarmCondition]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LivestockFarmCondition](
+	[ConditionID] [int] IDENTITY(1,1) NOT NULL,
+	[FarmID] [int] NULL,
+	[ConditionDetail] [nvarchar](500) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ConditionID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LivestockStatistic]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LivestockStatistic](
+	[StatisticID] [int] IDENTITY(1,1) NOT NULL,
+	[FarmID] [int] NULL,
+	[StatisticDate] [datetime] NULL,
+	[AnimalType] [nvarchar](50) NULL,
+	[AnimalCount] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[StatisticID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Outbreak]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Outbreak](
+	[OutbreakID] [int] IDENTITY(1,1) NOT NULL,
+	[OutbreakName] [nvarchar](100) NOT NULL,
+	[Latitude] [float] NOT NULL,
+	[Longitude] [float] NOT NULL,
+	[DetectedDate] [datetime] NOT NULL,
+	[Status] [nvarchar](50) NOT NULL,
+	[DiseaseID] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[OutbreakID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[OutbreakDiagnosis]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OutbreakDiagnosis](
+	[DiagnosisID] [int] IDENTITY(1,1) NOT NULL,
+	[DiagnosisResult] [nvarchar](500) NULL,
+	[DiagnosisDate] [datetime] NOT NULL,
+	[DoctorName] [nvarchar](100) NULL,
+	[OutbreakID] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[DiagnosisID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[OutbreakSymptom]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OutbreakSymptom](
+	[OutbreakID] [int] NOT NULL,
+	[SymptomID] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[OutbreakID] ASC,
+	[SymptomID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Provinces]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Provinces](
+	[ProvinceID] [int] IDENTITY(1,1) NOT NULL,
+	[ProvinceName] [nvarchar](100) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ProvinceID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Report]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Report](
+	[ReportID] [int] IDENTITY(1,1) NOT NULL,
+	[ReportName] [nvarchar](100) NOT NULL,
+	[CreatedTime] [datetime] NOT NULL,
+	[Author] [nvarchar](50) NULL,
+	[Summary] [nvarchar](500) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ReportID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[SafeLivestockZone]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SafeLivestockZone](
+	[ZoneID] [int] IDENTITY(1,1) NOT NULL,
+	[ZoneName] [nvarchar](100) NOT NULL,
+	[Address] [nvarchar](200) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ZoneID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Slaughterhouse]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Slaughterhouse](
+	[SlaughterhouseID] [int] IDENTITY(1,1) NOT NULL,
+	[SlaughterhouseName] [nvarchar](100) NOT NULL,
+	[Address] [nvarchar](200) NULL,
+	[Capacity] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[SlaughterhouseID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Symptom]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Symptom](
+	[SymptomID] [int] IDENTITY(1,1) NOT NULL,
+	[SymptomName] [nvarchar](100) NOT NULL,
+	[Description] [nvarchar](500) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[SymptomID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[TemporaryZone]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[TemporaryZone](
+	[ZoneID] [int] IDENTITY(1,1) NOT NULL,
+	[ZoneName] [nvarchar](100) NOT NULL,
+	[Address] [nvarchar](200) NULL,
+	[Capacity] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ZoneID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[UserGroupMembership]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserGroupMembership](
+	[UserID] [int] NOT NULL,
+	[GroupID] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[UserID] ASC,
+	[GroupID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[UserGroupRoles]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserGroupRoles](
+	[GroupID] [int] NOT NULL,
+	[RoleID] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[GroupID] ASC,
+	[RoleID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[UserGroups]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserGroups](
+	[GroupID] [int] IDENTITY(1,1) NOT NULL,
+	[GroupName] [nvarchar](100) NULL,
+	[Description] [nvarchar](255) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[GroupID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[UserLogs]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserLogs](
+	[LogID] [int] IDENTITY(1,1) NOT NULL,
+	[UserID] [int] NOT NULL,
+	[Action] [nvarchar](50) NOT NULL,
+	[ActionDate] [datetime] NULL,
+	[IPAddress] [nvarchar](50) NULL,
+	[DeviceInfo] [nvarchar](255) NULL,
+	[Description] [nvarchar](max) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[LogID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[UserRoles]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserRoles](
+	[RoleID] [int] IDENTITY(1,1) NOT NULL,
+	[RoleName] [nvarchar](100) NULL,
+	[Description] [nvarchar](255) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[RoleID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Users](
+	[UserID] [int] IDENTITY(1,1) NOT NULL,
+	[Username] [nvarchar](50) NOT NULL,
+	[PasswordHash] [nvarchar](256) NOT NULL,
+	[FullName] [nvarchar](100) NULL,
+	[Email] [nvarchar](100) NULL,
+	[Phone] [nvarchar](15) NULL,
+	[Status] [nvarchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[UserID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Vaccination]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Vaccination](
+	[VaccinationID] [int] IDENTITY(1,1) NOT NULL,
+	[VaccinationDate] [datetime] NOT NULL,
+	[VaccineName] [nvarchar](100) NULL,
+	[OutbreakID] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[VaccinationID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[VeterinaryBranch]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[VeterinaryBranch](
+	[BranchID] [int] IDENTITY(1,1) NOT NULL,
+	[BranchName] [nvarchar](100) NOT NULL,
+	[Address] [nvarchar](200) NULL,
+	[Phone] [nvarchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[BranchID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[VetMedicineAgency]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[VetMedicineAgency](
+	[AgencyID] [int] IDENTITY(1,1) NOT NULL,
+	[AgencyName] [nvarchar](100) NOT NULL,
+	[Address] [nvarchar](200) NULL,
+	[Phone] [nvarchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[AgencyID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Wards]    Script Date: 12/30/2024 8:14:41 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Wards](
+	[WardID] [int] IDENTITY(1,1) NOT NULL,
+	[WardName] [nvarchar](100) NOT NULL,
+	[DistrictID] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[WardID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Report] ADD  DEFAULT (getdate()) FOR [CreatedTime]
+GO
+ALTER TABLE [dbo].[UserLogs] ADD  DEFAULT (getdate()) FOR [ActionDate]
+GO
+ALTER TABLE [dbo].[Certificate]  WITH CHECK ADD FOREIGN KEY([FarmID])
+REFERENCES [dbo].[LivestockFarm] ([FarmID])
+GO
+ALTER TABLE [dbo].[DisasterPoint]  WITH CHECK ADD FOREIGN KEY([ReportID])
+REFERENCES [dbo].[Report] ([ReportID])
+GO
+ALTER TABLE [dbo].[Districts]  WITH CHECK ADD FOREIGN KEY([ProvinceID])
+REFERENCES [dbo].[Provinces] ([ProvinceID])
+GO
+ALTER TABLE [dbo].[FileAttachment]  WITH CHECK ADD FOREIGN KEY([ReportID])
+REFERENCES [dbo].[Report] ([ReportID])
+GO
+ALTER TABLE [dbo].[LivestockFarmCondition]  WITH CHECK ADD FOREIGN KEY([FarmID])
+REFERENCES [dbo].[LivestockFarm] ([FarmID])
+GO
+ALTER TABLE [dbo].[LivestockStatistic]  WITH CHECK ADD FOREIGN KEY([FarmID])
+REFERENCES [dbo].[LivestockFarm] ([FarmID])
+GO
+ALTER TABLE [dbo].[Outbreak]  WITH CHECK ADD FOREIGN KEY([DiseaseID])
+REFERENCES [dbo].[DiseaseType] ([DiseaseID])
+GO
+ALTER TABLE [dbo].[OutbreakDiagnosis]  WITH CHECK ADD FOREIGN KEY([OutbreakID])
+REFERENCES [dbo].[Outbreak] ([OutbreakID])
+GO
+ALTER TABLE [dbo].[OutbreakSymptom]  WITH CHECK ADD FOREIGN KEY([OutbreakID])
+REFERENCES [dbo].[Outbreak] ([OutbreakID])
+GO
+ALTER TABLE [dbo].[OutbreakSymptom]  WITH CHECK ADD FOREIGN KEY([SymptomID])
+REFERENCES [dbo].[Symptom] ([SymptomID])
+GO
+ALTER TABLE [dbo].[UserGroupMembership]  WITH CHECK ADD FOREIGN KEY([GroupID])
+REFERENCES [dbo].[UserGroups] ([GroupID])
+GO
+ALTER TABLE [dbo].[UserGroupMembership]  WITH CHECK ADD FOREIGN KEY([UserID])
+REFERENCES [dbo].[Users] ([UserID])
+GO
+ALTER TABLE [dbo].[UserGroupRoles]  WITH CHECK ADD FOREIGN KEY([GroupID])
+REFERENCES [dbo].[UserGroups] ([GroupID])
+GO
+ALTER TABLE [dbo].[UserGroupRoles]  WITH CHECK ADD FOREIGN KEY([RoleID])
+REFERENCES [dbo].[UserRoles] ([RoleID])
+GO
+ALTER TABLE [dbo].[UserLogs]  WITH CHECK ADD FOREIGN KEY([UserID])
+REFERENCES [dbo].[Users] ([UserID])
+GO
+ALTER TABLE [dbo].[Vaccination]  WITH CHECK ADD FOREIGN KEY([OutbreakID])
+REFERENCES [dbo].[Outbreak] ([OutbreakID])
+GO
+ALTER TABLE [dbo].[Wards]  WITH CHECK ADD FOREIGN KEY([DistrictID])
+REFERENCES [dbo].[Districts] ([DistrictID])
+GO
+USE [master]
+GO
+ALTER DATABASE [DaDManagement] SET  READ_WRITE 
+GO

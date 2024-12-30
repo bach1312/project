@@ -1,0 +1,264 @@
+﻿<mah:MetroWindow
+    x:Class="disaster_management.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cvt="clr-namespace:disaster_management.Views.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:disaster_management"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uc="clr-namespace:disaster_management.Views.Usercontrols"
+    Title="Phiên bản: 1.0.0.1"
+    Width="1366"
+    Height="850"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <mah:MetroWindow.Resources>
+        <cvt:NumberToVisibilityConverter x:Key="NumberToVisibilityConverter" />
+    </mah:MetroWindow.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <!--  TITLE APP  -->
+        <Grid Background="AliceBlue" DataContext="{Binding UserViewModel}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="30"
+                Text="Quản Lý Thiên Tai - Dịch Bệnh" />
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontSize="14" Text="Current User: " />
+                    <TextBlock FontSize="14" FontWeight="Bold" Foreground="Green" Text="{Binding CurrentUser.Username}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock  FontSize="14" Text="User Role: " />
+                    <TextBlock FontSize="14" FontWeight="Bold" Foreground="Green" Text="{Binding UserRole.RoleName}" />
+                </StackPanel>
+
+            </StackPanel>
+
+        </Grid>
+        <!--  Content  -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <!--  Sidebar menu  -->
+            <Grid Background="White">
+                <DockPanel>
+                    <ListBox
+                        x:Name="ListBoxMenu"
+                        Width="150"
+                        Background="Transparent"
+                        DockPanel.Dock="Left"
+                        FontSize="15"
+                        SelectedIndex="0">
+                        <!--  Menu Items  -->
+                        <ListBoxItem
+                            Height="100"
+                            Padding="10"
+                            HorizontalContentAlignment="Center"
+                            Background="#c3dbe3"
+                            BorderBrush="White"
+                            BorderThickness="1"
+                            FontWeight="Bold"
+                            Foreground="#3b3a39">
+                            <StackPanel VerticalAlignment="Center" Orientation="Vertical">
+                                <Image
+                                    Width="40"
+                                    Height="40"
+                                    Source="/Views/Images/house.png" />
+
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontWeight="Bold"
+                                    Foreground="#3d2c1e"
+                                    Text="Trang Chủ" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem
+                            Height="100"
+                            Padding="10"
+                            HorizontalContentAlignment="Center"
+                            Background="#c3dbe3"
+                            BorderBrush="White"
+                            BorderThickness="1"
+                            FontWeight="Bold"
+                            Foreground="#3b3a39">
+                            <StackPanel VerticalAlignment="Center" Orientation="Vertical">
+                                <Image
+                                    Width="40"
+                                    Height="40"
+                                    Source="/Views/Images/extreme-weather.png" />
+
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontWeight="Bold"
+                                    Foreground="#3d2c1e"
+                                    Text="Thiên Tai" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem
+                            Height="100"
+                            Padding="10"
+                            HorizontalContentAlignment="Center"
+                            Background="#c3dbe3"
+                            BorderBrush="White"
+                            BorderThickness="1"
+                            FontWeight="Bold"
+                            Foreground="#3b3a39">
+                            <StackPanel VerticalAlignment="Center" Orientation="Vertical">
+                                <Image
+                                    Width="40"
+                                    Height="40"
+                                    Source="/Views/Images/coronavirus.png" />
+
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontWeight="Bold"
+                                    Foreground="#3d2c1e"
+                                    Text="Dịch Bệnh" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem
+                            Height="100"
+                            Padding="10"
+                            HorizontalContentAlignment="Center"
+                            Background="#c3dbe3"
+                            BorderBrush="White"
+                            BorderThickness="1"
+                            FontWeight="Bold"
+                            Foreground="#3b3a39">
+                            <StackPanel VerticalAlignment="Center" Orientation="Vertical">
+                                <Image
+                                    Width="40"
+                                    Height="40"
+                                    Source="/Views/Images/cow.png" />
+
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontWeight="Bold"
+                                    Foreground="#3d2c1e"
+                                    Text="Chăn Nuôi" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem
+                            Height="100"
+                            Padding="10"
+                            HorizontalContentAlignment="Center"
+                            Background="#c3dbe3"
+                            BorderBrush="White"
+                            BorderThickness="1"
+                            FontWeight="Bold"
+                            Foreground="#3b3a39">
+                            <StackPanel VerticalAlignment="Center" Orientation="Vertical">
+                                <Image
+                                    Width="40"
+                                    Height="40"
+                                    Source="/Views/Images/global.png" />
+
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontWeight="Bold"
+                                    Foreground="#3d2c1e"
+                                    Text="Địa Phương" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem
+                            Height="100"
+                            Padding="10"
+                            HorizontalContentAlignment="Center"
+                            Background="#c3dbe3"
+                            BorderBrush="White"
+                            BorderThickness="1"
+                            FontWeight="Bold"
+                            Foreground="#3b3a39">
+                            <StackPanel VerticalAlignment="Center" Orientation="Vertical">
+                                <Image
+                                    Width="40"
+                                    Height="40"
+                                    Source="/Views/Images/question-mark.png" />
+
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontWeight="Bold"
+                                    Foreground="#3d2c1e"
+                                    Text="Hệ Thống" />
+                            </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem PreviewMouseDown="Exit_MouseDown"
+                            Height="100"
+                            Padding="10"
+                            HorizontalContentAlignment="Center"
+                            Background="#c3dbe3"
+                            BorderBrush="White"
+                            BorderThickness="1"
+                            FontWeight="Bold"
+                            Foreground="#3b3a39">
+                            <StackPanel VerticalAlignment="Center" Orientation="Vertical" >
+                                <Image
+                                    Width="40"
+                                    Height="40"
+                                    Source="/Views/Images/log-out.png" />
+
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontWeight="Bold"
+                                    Foreground="#3d2c1e"
+                                    Text="Thoát" />
+                            </StackPanel>
+                        </ListBoxItem>
+                    </ListBox>
+                </DockPanel>
+            </Grid>
+            <!--  END Sidebar menu  -->
+
+            <!--  User control Menu  -->
+            <Grid Grid.Column="1">
+                <Image Height="500" Width="500" Source="/Views/Images/Drawing1.png" />
+
+                <uc:DisasterManagement DataContext="{Binding DisasterViewModel}" Visibility="{Binding ElementName=ListBoxMenu, Path=SelectedIndex, Converter={StaticResource NumberToVisibilityConverter}, ConverterParameter=1}" />
+                <uc:DiseaseManagement DataContext="{Binding DiseaseViewModel}" Visibility="{Binding ElementName=ListBoxMenu, Path=SelectedIndex, Converter={StaticResource NumberToVisibilityConverter}, ConverterParameter=2}" />
+                <uc:LivestockManagement DataContext="{Binding LiveStockViewModel}" Visibility="{Binding ElementName=ListBoxMenu, Path=SelectedIndex, Converter={StaticResource NumberToVisibilityConverter}, ConverterParameter=3}" />
+                <uc:LocationManagement DataContext="{Binding LocationViewModel}" Visibility="{Binding ElementName=ListBoxMenu, Path=SelectedIndex, Converter={StaticResource NumberToVisibilityConverter}, ConverterParameter=4}"/>
+                <uc:SystemManagement DataContext="{Binding UserViewModel}" Visibility="{Binding ElementName=ListBoxMenu, Path=SelectedIndex, Converter={StaticResource NumberToVisibilityConverter}, ConverterParameter=5}" />
+            </Grid>
+            <!--  END User control Menu  -->
+
+
+
+
+
+        </Grid>
+        <!--  Footer  -->
+        <Grid Grid.Row="2">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    Text="Website: www.phongchongdichbenhthientai.org" />
+                <TextBlock
+                    Margin="15,0,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    Text="| Hotline: 027.214.5486" />
+            </StackPanel>
+
+        </Grid>
+        <!--  END Footer  -->
+    </Grid>
+</mah:MetroWindow>

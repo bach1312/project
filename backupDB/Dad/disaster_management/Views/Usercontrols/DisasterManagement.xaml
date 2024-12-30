@@ -1,0 +1,373 @@
+﻿<UserControl
+    x:Class="disaster_management.Views.Usercontrols.DisasterManagement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:disaster_management.Views.Usercontrols"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="600"
+    d:DesignWidth="800"
+    Background="White"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--  MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive!  -->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <!--  Theme setting  -->
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <!--  Style cho TabControl  -->
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--  Title  -->
+        <Grid
+            Width="250"
+            HorizontalAlignment="Left"
+            Background="#3393DF">
+            <TextBlock
+                Margin="10,0,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="18"
+                Foreground="White"
+                Text="QUẢN LÝ THIÊN TAI" />
+        </Grid>
+
+        <!--  END Title  -->
+        <Grid Grid.Row="1" Margin="10,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1.2*" />
+            </Grid.ColumnDefinitions>
+
+            <!--  Danh dách điểm trượt lỡ/ lũ quen  -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock
+                        Width="160"
+                        VerticalAlignment="Center"
+                        FontSize="14">
+                        Tìm kiếm theo loại thiên tai:
+                    </TextBlock>
+                    <!--  Timf kieems  -->
+                    <StackPanel
+                        Margin="10,10,0,0"
+                        VerticalAlignment="Top"
+                        Orientation="Horizontal">
+
+                        <TextBox
+                            Width="190"
+                            Style="{StaticResource MahApps.Styles.TextBox}"
+                            Text="{Binding SearchDisasterPoint}" />
+                        <Button
+                            Width="90"
+                            Margin="5,0,0,0"
+                            Command="{Binding LoadDisasterPointCommand}"
+                            Content="Làm Mới"
+                            FontSize="16"
+                            Style="{StaticResource MahApps.Styles.Button}" />
+                        <Button
+                            Width="90"
+                            Margin="5,0,0,0"
+                            Command="{Binding SearchDisasterPointCommand}"
+                            Content="Tìm Kiếm"
+                            FontSize="16"
+                            Style="{StaticResource MahApps.Styles.Button}" />
+                    </StackPanel>
+                </StackPanel>
+
+                <GroupBox
+                    Grid.Row="2"
+                    Margin="0,20,0,0"
+                    Header="Danh sách địa điểm thiên tai">
+                    <Grid VerticalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
+                        <DataGrid
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Background="AliceBlue"
+                            ItemsSource="{Binding DisasterPointList}"
+                            SelectedItem="{Binding SelectedDisasterPoint}" />
+                        <!--  phan trang  -->
+                        <StackPanel Visibility="Collapsed"
+                            Grid.Row="1"
+                            Height="40"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            Background="Transparent"
+                            Orientation="Horizontal">
+                            <Button
+                                Width="80"
+                                Margin="0,0,5,0"
+                                Content="Đầu" />
+                            <Button
+                                Width="80"
+                                Margin="5,0,5,0"
+                                Content="Trước" />
+                            <Button
+                                Width="80"
+                                Margin="5,0,5,0"
+                                Content="Tiếp" />
+                            <Button
+                                Width="80"
+                                Margin="5,0,0,0"
+                                Content="Cuối" />
+                        </StackPanel>
+                    </Grid>
+
+                </GroupBox>
+
+            </Grid>
+            <!--  END  Danh dách điểm trượt lỡ/ lũ quen  -->
+
+            <!--  Thao tác  -->
+            <Grid Grid.Column="1">
+                <StackPanel>
+
+
+
+                    <!--  Thao tac  -->
+
+
+                    <GroupBox Margin="10,25,0,0" Header="ĐIỀU CHỈNH DỮ LIỆU THIÊN TAI">
+                        <TabControl>
+                            <!--  Thêm  -->
+                            <TabItem Header="Thêm">
+                                <!--<TabItem.Header>
+                                <Border BorderBrush="Transparent" BorderThickness="1">
+                                    <TextBlock FontWeight="Bold" Text="Thêm thông tin" />
+                                </Border>
+                            </TabItem.Header>-->
+                                <StackPanel>
+                                    <!--  loai thien tai  -->
+                                    <StackPanel
+                                        Margin="10,20,0,0"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+                                        <TextBlock Width="90" VerticalAlignment="Center">Loại thiên tai:</TextBlock>
+                                        <TextBox Width="160" Text="{Binding DisasterPoint.DisasterType}" />
+                                    </StackPanel>
+                                    <!--  ten dia diem  -->
+                                    <StackPanel
+                                        Margin="10,5,0,0"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+                                        <TextBlock Width="90" VerticalAlignment="Center">Tên địa điểm:</TextBlock>
+                                        <TextBox
+                                            Width="160"
+                                            Style="{StaticResource MahApps.Styles.TextBox}"
+                                            Text="{Binding DisasterPoint.LocationName}" />
+                                    </StackPanel>
+                                    <!--  toa do  -->
+                                    <StackPanel
+                                        Margin="10,5,0,0"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+                                        <TextBlock Width="90" VerticalAlignment="Center">Kinh tuyến:</TextBlock>
+                                        <TextBox
+                                            Width="160"
+                                            Style="{StaticResource MahApps.Styles.TextBox}"
+                                            Text="{Binding DisasterPoint.Longitude}" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        Margin="10,5,0,0"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+                                        <TextBlock Width="90" VerticalAlignment="Center">Vĩ tuyến:</TextBlock>
+                                        <TextBox
+                                            Width="160"
+                                            Style="{StaticResource MahApps.Styles.TextBox}"
+                                            Text="{Binding DisasterPoint.Latitude}" />
+                                    </StackPanel>
+                                    <!--  mo ta them  -->
+                                    <StackPanel
+                                        Margin="10,5,0,0"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+                                        <TextBlock Width="90" VerticalAlignment="Center">Mô tả:</TextBlock>
+                                        <TextBox
+                                            Width="160"
+                                            Style="{StaticResource MahApps.Styles.TextBox}"
+                                            Text="{Binding DisasterPoint.Description}" />
+                                    </StackPanel>
+                                    <!--  thoi gian  -->
+                                    <StackPanel
+                                        Margin="10,5,0,0"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+                                        <TextBlock Width="90" VerticalAlignment="Center">Thời gian:</TextBlock>
+                                        <mah:DateTimePicker Width="160" SelectedDateTime="{Binding DisasterPoint.OccurredTime}" />
+                                    </StackPanel>
+                                    <!--  muc do nghiem trong  -->
+                                    <StackPanel
+                                        Margin="10,5,0,0"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+                                        <TextBlock Width="90" VerticalAlignment="Center">Cấp độ thiên tai:</TextBlock>
+                                        <TextBox
+                                            Width="160"
+                                            Style="{StaticResource MahApps.Styles.TextBox}"
+                                            Text="{Binding DisasterPoint.Severity}" />
+                                    </StackPanel>
+                                    <Button
+                                        Height="40"
+                                        Margin="0,20,0,0"
+                                        Command="{Binding AddDisasterPointCommand}"
+                                        FontSize="18">
+                                        THÊM
+                                    </Button>
+                                </StackPanel>
+                            </TabItem>
+
+
+                            <!--  Sửa  -->
+                            <TabItem Header="Sửa">
+
+                                <StackPanel>
+                                    <!--  loai thien tai  -->
+                                    <StackPanel
+                                        Margin="10,20,0,0"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+                                        <TextBlock Width="90" VerticalAlignment="Center">Loại thiên tai:</TextBlock>
+                                        <TextBox Width="160" Text="{Binding DisasterPointUpdate.DisasterType}" />
+                                    </StackPanel>
+                                    <!--  ten dia diem  -->
+                                    <StackPanel
+                                        Margin="10,5,0,0"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+                                        <TextBlock Width="90" VerticalAlignment="Center">Tên địa điểm:</TextBlock>
+                                        <TextBox
+                                            Width="160"
+                                            Style="{StaticResource MahApps.Styles.TextBox}"
+                                            Text="{Binding DisasterPointUpdate.LocationName}" />
+                                    </StackPanel>
+                                    <!--  toa do  -->
+                                    <StackPanel
+                                        Margin="10,5,0,0"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+                                        <TextBlock Width="90" VerticalAlignment="Center">Kinh tuyến:</TextBlock>
+                                        <TextBox
+                                            Width="160"
+                                            Style="{StaticResource MahApps.Styles.TextBox}"
+                                            Text="{Binding DisasterPointUpdate.Longitude}" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        Margin="10,5,0,0"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+                                        <TextBlock Width="90" VerticalAlignment="Center">Vĩ tuyến:</TextBlock>
+                                        <TextBox
+                                            Width="160"
+                                            Style="{StaticResource MahApps.Styles.TextBox}"
+                                            Text="{Binding DisasterPointUpdate.Latitude}" />
+                                    </StackPanel>
+                                    <!--  mo ta them  -->
+                                    <StackPanel
+                                        Margin="10,5,0,0"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+                                        <TextBlock Width="90" VerticalAlignment="Center">Mô tả:</TextBlock>
+                                        <TextBox
+                                            Width="160"
+                                            Style="{StaticResource MahApps.Styles.TextBox}"
+                                            Text="{Binding DisasterPointUpdate.Description}" />
+                                    </StackPanel>
+                                    <!--  thoi gian  -->
+                                    <StackPanel
+                                        Margin="10,5,0,0"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+                                        <TextBlock Width="90" VerticalAlignment="Center">Thời gian:</TextBlock>
+                                        <mah:DateTimePicker Width="160" SelectedDateTime="{Binding DisasterPoint.OccurredTime}" />
+                                    </StackPanel>
+                                    <!--  muc do nghiem trong  -->
+                                    <StackPanel
+                                        Margin="10,5,0,0"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+                                        <TextBlock Width="90" VerticalAlignment="Center">Cấp độ thiên tai:</TextBlock>
+                                        <TextBox
+                                            Width="160"
+                                            Style="{StaticResource MahApps.Styles.TextBox}"
+                                            Text="{Binding DisasterPointUpdate.Severity}" />
+                                    </StackPanel>
+                                    <Button
+                                        Height="40"
+                                        Margin="0,20,0,0"
+                                        Command="{Binding UpdateDisasterPointCommand}"
+                                        FontSize="18">
+                                        SỬA
+                                    </Button>
+                                </StackPanel>
+                            </TabItem>
+
+                            <!--  XOÁ  -->
+                            <TabItem Header="Xoá">
+                                <!--  ID thien tai  -->
+                                <StackPanel>
+
+                                    <StackPanel
+                                        Margin="10,20,0,0"
+                                        VerticalAlignment="Top"
+                                        Orientation="Horizontal">
+                                        <TextBlock Width="90" VerticalAlignment="Center">ID thiên tai:</TextBlock>
+                                        <TextBox
+                                            Width="160"
+                                            IsReadOnly="True"
+                                            Text="{Binding SelectedDisasterPoint.DisasterId}" />
+                                    </StackPanel>
+                                    <Button
+                                        Height="40"
+                                        Margin="0,20,0,0"
+                                        Command="{Binding DeleteDisasterPointCommand}"
+                                        FontSize="18">
+                                        XOÁ
+                                    </Button>
+                                </StackPanel>
+
+                            </TabItem>
+
+                        </TabControl>
+                    </GroupBox>
+
+
+
+                </StackPanel>
+
+
+
+            </Grid>
+
+
+
+
+
+
+
+        </Grid>
+
+
+    </Grid>
+</UserControl>
